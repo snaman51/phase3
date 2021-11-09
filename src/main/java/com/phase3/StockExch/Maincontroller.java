@@ -67,17 +67,11 @@ public class Maincontroller {
 	}
 	
 	@CrossOrigin
-	@RequestMapping(value = "/login/{email}/{pwd}", method = RequestMethod.GET)
-	public Boolean login(@PathVariable String email,@PathVariable String pwd)
+	@RequestMapping(value = "/login/{email}", method = RequestMethod.GET)
+	public User1 login(@PathVariable String email)
 	{
 		User1 u=userrep.findByemail(email);
-		if(u.getpassword()==pwd) {
-			return true;
-			
-		}
-		else {
-			return false;
-		}
+		return u;
 	}
 	
 //	@RequestMapping(value = "/mapcompanycode", method = RequestMethod.POST)
@@ -206,6 +200,14 @@ public class Maincontroller {
 	public List<IPODetail> getipos() throws ClassNotFoundException, IOException {
 
 	    List<IPODetail> stkprice= iporep.findAll();
+	   // make sure your entity class properties of user are in lower case and match the json,to avoid errors
+	    return stkprice;
+	}
+	
+	@RequestMapping(value = "/getipo/{cmpID}",method=RequestMethod.GET, headers = "Accept=application/json"  )
+	public List<IPODetail> getipos(@PathVariable Long cmpID) throws ClassNotFoundException, IOException {
+
+	    List<IPODetail> stkprice= iporep.findByCompanyCode(cmpID);
 	   // make sure your entity class properties of user are in lower case and match the json,to avoid errors
 	    return stkprice;
 	}

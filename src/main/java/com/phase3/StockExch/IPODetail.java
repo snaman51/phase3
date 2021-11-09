@@ -61,7 +61,7 @@ public class IPODetail {
 	}
 
 	//fetch = FetchType.LAZY          
-	@OneToOne( fetch=FetchType.EAGER,cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToOne( fetch=FetchType.LAZY,cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnore
 	private Company company;
 
